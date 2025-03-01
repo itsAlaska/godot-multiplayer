@@ -22,6 +22,11 @@ host_hbox = NodePath("UI/HostHBox")
 
 [node name="----- Level -----" type="Node" parent="."]
 
+[node name="LevelSpawner" type="MultiplayerSpawner" parent="."]
+_spawnable_scenes = PackedStringArray("res://levels/level_01/level_01.tscn")
+spawn_path = NodePath("../----- Level -----")
+spawn_limit = 1
+
 [node name="UI" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 15
@@ -101,11 +106,6 @@ grow_vertical = 2
 label_settings = SubResource("LabelSettings_j6s6j")
 horizontal_alignment = 1
 vertical_alignment = 1
-
-[node name="LevelSpawner" type="MultiplayerSpawner" parent="."]
-_spawnable_scenes = PackedStringArray("res://levels/level_01/level_01.tscn")
-spawn_path = NodePath("../----- Level -----")
-spawn_limit = 1
 
 [connection signal="pressed" from="UI/NotConnectedHBox/HostButton" to="." method="_on_host_button_pressed"]
 [connection signal="pressed" from="UI/NotConnectedHBox/JoinButton" to="." method="_on_join_button_pressed"]
