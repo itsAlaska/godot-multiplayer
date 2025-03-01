@@ -92,7 +92,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("6_fiio7")
 }],
-"loop": true,
+"loop": false,
 "name": &"double_jump_start",
 "speed": 24.0
 }, {
@@ -220,7 +220,7 @@ animations = [{
 "duration": 1.0,
 "texture": ExtResource("42_7t1ho")
 }],
-"loop": true,
+"loop": false,
 "name": &"jump_start",
 "speed": 24.0
 }, {
@@ -314,6 +314,7 @@ shape = SubResource("RectangleShape2D_w7vuy")
 position = Vector2(0, -30)
 scale = Vector2(0.1, 0.1)
 sprite_frames = SubResource("SpriteFrames_4bvcw")
-animation = &"idle"
+animation = &"jump_start"
 autoplay = "idle"
-frame_progress = 0.728602
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]

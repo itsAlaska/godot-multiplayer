@@ -6,10 +6,14 @@ extends CharacterBody2D
 @export var movement_speed = 300
 @export var gravity = 30
 @export var jump_strength = 600
+@export var max_jumps = 1
 
 @onready var initial_sprite_scale = player_sprite.scale
 
-func _physics_process(delta: float) -> void:
+var jump_count = 0
+
+
+func _physics_process(_delta: float) -> void:
 	# .get_action_strength returns 1 or 0 on keyboard, but guages degree player 
 	# has the stick for a float between 0 and 1. Positive values move right
 	# negative values move left.
@@ -29,9 +33,13 @@ func _physics_process(delta: float) -> void:
 	# Same as above more or less. Checks if the jump button is pressed and if 
 	# the player is on the floor.
 	var is_jumping = Input.is_action_just_pressed("jump") and is_on_floor()
+	# Mostly same as above just checks to see that they are already in a descent
+	var is_double_jumping = Input.is_action_just_pressed("jump") and is_falling
 	# Checks for if the player has released the jump button and is also
 	# on an upward trajectory to end the jump early.
-	var is_jump_cancelled = Input.is_action_just_released("jump") and velocity.y < 0
+	var is_jump_cancelled = (
+		Input.is_action_just_released("jump") and velocity.y < 0
+		)
 	# Checks for if the player is on the floor and the value of the x-axis 
 	# velocity is 0.
 	var is_idle = is_on_floor() and is_zero_approx(velocity.x)
@@ -40,9 +48,21 @@ func _physics_process(delta: float) -> void:
 	
 	# Checks if the jump button has been pressed and confirms player is on the 
 	# floor, then pushes character into the air by the jump_strength amount.
-	# Has to be negative because, in Godot, +Y values go down.
-	if Input.is_action_just_pressed("jump") && is_on_floor():
+	# Has to be negative because, in Godot, +Y values go down. Also is tracking
+	# the states of the jumping player to deduce if it is ending a jump early
+	# or jumping a second time. Also tracks the amount of times jumped. Resets 
+	# when on floor.
+	if is_jumping:
+		jump_count += 1
 		velocity.y = -jump_strength
+	elif is_double_jumping:
+		jump_count += 1
+		if jump_count <= max_jumps:
+			velocity.y = -jump_strength
+	elif is_jump_cancelled:
+		velocity.y = 0
+	elif is_on_floor():
+		jump_count = 0
 	
 	# Default function required for moving character
 	move_and_slide()
@@ -51,6 +71,8 @@ func _physics_process(delta: float) -> void:
 	# variables and playing the corresponding animations.
 	if is_jumping:
 		player_sprite.play("jump_start")
+	elif is_double_jumping:
+		player_sprite.play("double_jump_start")
 	elif is_walking:
 		player_sprite.play("walk")
 	elif is_falling:
@@ -71,3 +93,7 @@ func _physics_process(delta: float) -> void:
 			# Resets scale so that when the character is moving right the sprite 
 			# faces right
 			player_sprite.scale = initial_sprite_scale
+
+
+func _on_animated_sprite_2d_animation_finished() -> void:
+	player_sprite.play("jump")
