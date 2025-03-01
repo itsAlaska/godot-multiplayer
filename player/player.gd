@@ -1,6 +1,8 @@
 extends CharacterBody2D
 
 
+@export var player_camera: PackedScene
+@export var camera_height = 316
 @export var player_sprite: AnimatedSprite2D
 
 @export var movement_speed = 300
@@ -11,7 +13,22 @@ extends CharacterBody2D
 @onready var initial_sprite_scale = player_sprite.scale
 
 var jump_count = 0
+var camera_instance
 
+
+func _ready():
+	# When the script loads up, the player's camera is created and stored in a 
+	# variable.
+	camera_instance = player_camera.instantiate()
+	# Accesses the camera's global position and moves it on the y-axis to the 
+	#value stored in the camera_height variable.
+	camera_instance.global_position.y = camera_height
+	# Accesses the current scene and adds the camera as a child of the current 
+	# scene.
+	get_tree().current_scene.add_child.call_deferred(camera_instance)
+
+func _process(_delta):
+	camera_instance.global_position.x = global_position.x
 
 func _physics_process(_delta: float) -> void:
 	# .get_action_strength returns 1 or 0 on keyboard, but guages degree player 

@@ -51,6 +51,3 @@ tile_set = SubResource("TileSet_spvgm")
 [node name="Player" parent="." instance=ExtResource("2_ub70u")]
 position = Vector2(802, 577)
 max_jumps = 3
-
-[node name="Camera2D" type="Camera2D" parent="."]
-position = Vector2(779, 316)
