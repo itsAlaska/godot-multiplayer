@@ -46,6 +46,12 @@ func _on_start_button_pressed() -> void:
 	change_level.call_deferred(level_scene)
 	
 func change_level(scene):
+	# Iterate through all children in the level_container node
+	for child in level_container.get_children():
+		# Removes the child from the level_container
+		level_container.remove_child(child)
+		# Deletes the child entirely
+		child.queue_free()
 	# Creates the level scene that is meant to be the current level and makes 
 	# it a child of the level_container
 	level_container.add_child(scene.instantiate())
