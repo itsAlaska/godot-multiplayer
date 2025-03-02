@@ -31,6 +31,7 @@ shape = SubResource("RectangleShape2D_j823w")
 
 [node name="DoorOpen" type="Sprite2D" parent="."]
 visible = false
+z_index = -100
 position = Vector2(31, -69)
 scale = Vector2(0.54, 0.54)
 texture = ExtResource("3_o8g1s")
