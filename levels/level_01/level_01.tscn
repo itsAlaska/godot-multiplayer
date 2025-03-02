@@ -97,9 +97,10 @@ position = Vector2(842, 574)
 
 [node name="----- Interactables -----" type="Node" parent="."]
 
-[node name="PressurePlate" parent="----- Interactables -----" instance=ExtResource("6_cuh6q")]
-position = Vector2(1088, 573)
+[node name="DoorPlate" parent="----- Interactables -----" instance=ExtResource("6_cuh6q")]
+position = Vector2(946, 573)
 
-[node name="Door" parent="." instance=ExtResource("7_bj20c")]
-position = Vector2(493, 576)
-is_open = true
+[node name="Door" parent="----- Interactables -----" instance=ExtResource("7_bj20c")]
+position = Vector2(535, 576)
+
+[connection signal="toggle" from="----- Interactables -----/DoorPlate" to="----- Interactables -----/Door" method="activate"]

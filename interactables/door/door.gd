@@ -21,3 +21,7 @@ func set_door_properties():
 
 func _on_multiplayer_synchronizer_synchronized() -> void:
 	set_door_properties()
+
+
+func _on_door_plate_toggle(state: Variant) -> void:
+	pass # Replace with function body.
