@@ -109,4 +109,3 @@ position = Vector2(320, 576)
 scale = Vector2(-1, 1)
 
 [connection signal="toggle" from="----- Interactables -----/DoorPlate" to="----- Interactables -----/Door" method="activate"]
-[connection signal="toggle" from="----- Interactables -----/DoorPlate" to="----- Interactables -----/Chest" method="_on_test_interact"]
