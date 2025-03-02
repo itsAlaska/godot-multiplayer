@@ -8,23 +8,50 @@ extends CharacterBody2D
 @export var movement_speed = 300
 @export var gravity = 30
 @export var jump_strength = 600
-@export var max_jumps = 1
+@export var max_jumps = 3
 
 @onready var initial_sprite_scale = player_sprite.scale
 
+var owner_id = 1
 var jump_count = 0
 var camera_instance
 
 
-func _ready():
+func _enter_tree():
+	# Sets the owner id to be an integer converted version of the players name
+	owner_id = name.to_int()
+	
+	# Makes sure that this instantiated player node can only be controlled by the
+	# player, identified by their id
+	set_multiplayer_authority(owner_id)
+	
+	# Performs a check that the person running the this code segment is in fact
+	# the owner of this node, and ends the function if it is not. Essentially ensuring
+	# that the camera spawned in goes only to the player
+	if owner_id != multiplayer.get_unique_id():
+		return
+	
 	# Refer to function at the bottom of the script for notes.
 	set_up_camera()
 
 func _process(_delta):
+	if multiplayer.multiplayer_peer == null:
+		return
+	# Makes sure that the code in this function is only run by the owner of this 
+	# scene
+	if owner_id != multiplayer.get_unique_id():
+		return
+		
 	# Refer to function at the bottom of the script for notes.
 	update_camera_pos()
 
 func _physics_process(_delta: float) -> void:
+	# Makes sure that the code in this function is only run by the owner of this 
+	# scene
+	if owner_id != multiplayer.get_unique_id():
+		return
+		
+	
 	# .get_action_strength returns 1 or 0 on keyboard, but guages degree player 
 	# has the stick for a float between 0 and 1. Positive values move right
 	# negative values move left.
@@ -125,8 +152,10 @@ func handle_movement_state():
 		jump_count += 1
 		velocity.y = -jump_strength
 	elif is_double_jumping:
+		
 		jump_count += 1
 		if jump_count <= max_jumps:
+			print("double jumping")
 			velocity.y = -jump_strength
 	elif is_jump_cancelled:
 		velocity.y = 0

@@ -42,8 +42,9 @@ physics_layer_0/collision_layer = 1
 physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_nwh53")
 
-[node name="level_01" type="Node2D" node_paths=PackedStringArray("players_container", "spawn_points")]
+[node name="level_01" type="Node2D" node_paths=PackedStringArray("player_spawner", "players_container", "spawn_points")]
 script = ExtResource("1_teh4t")
+player_spawner = NodePath("----- Players -----/PlayerSpawner")
 players_container = NodePath("----- Players -----/PlayersContainer")
 player_scene = ExtResource("2_ub70u")
 spawn_points = [NodePath("----- Players -----/SpawnPoint_0"), NodePath("----- Players -----/SpawnPoint_1")]

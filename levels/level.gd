@@ -1,6 +1,7 @@
 extends Node2D
 
 
+@export var player_spawner: MultiplayerSpawner
 @export var players_container: Node2D
 @export var player_scene: PackedScene
 @export var spawn_points: Array[Node2D]
@@ -32,8 +33,14 @@ func _ready() -> void:
 	# Manually run add_player on the host, which always has the id of 1
 	add_player(1)
 	
+func _enter_tree() -> void:
+	# Sets the method to be used each time a player is spawned
+	player_spawner.spawn_function = spawn_player
+	
 # Built-in function called when this node is removed from the tree
 func _exit_tree() -> void:
+	if multiplayer.multiplayer_peer == null:
+		return
 	# Checks that the player is the host and ends the function if they are not
 	if not multiplayer.is_server():
 		return
@@ -42,16 +49,9 @@ func _exit_tree() -> void:
 	# method
 	multiplayer.peer_disconnected.disconnect(delete_player)
 
-# Called for every player that connects. Needs player id: host is always 1.
 func add_player(id):
-	# Instantiates a new player scene
-	var player_instance = player_scene.instantiate()
-	# Set the position of the spawned in player
-	player_instance.position = get_spawn_point()
-	# Changes the name of the player_instance node in the explorer
-	player_instance.name = str(id)
-	# Adds the newly created player to the players_container
-	players_container.add_child(player_instance)
+	# Uses the PlayerSpawner spawn function to create the new player
+	player_spawner.spawn(id)
 	
 # Called when a player leaves the game to clean up any data associated with them
 func delete_player(id):
@@ -76,3 +76,14 @@ func get_spawn_point():
 		next_spawn_point_index = 0
 	
 	return spawn_point
+
+func spawn_player(id):
+	# Instantiates a new player scene
+	var player_instance = player_scene.instantiate()
+	# Set the position of the spawned in player
+	player_instance.position = get_spawn_point()
+	# Changes the name of the player_instance node in the explorer
+	player_instance.name = str(id)
+	# Returns the created instance of the player
+	return player_instance
+	
