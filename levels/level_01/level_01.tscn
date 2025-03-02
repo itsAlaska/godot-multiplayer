@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=4 uid="uid://kh8uvbbla6bq"]
+[gd_scene load_steps=11 format=4 uid="uid://kh8uvbbla6bq"]
 
 [ext_resource type="Texture2D" uid="uid://chwbcf7n2ajtp" path="res://art/platforms/Platformer_spritesheet.png" id="1_bu5tn"]
 [ext_resource type="Script" path="res://levels/level.gd" id="1_teh4t"]
@@ -7,6 +7,7 @@
 [ext_resource type="Texture2D" uid="uid://bujx43rcy5b85" path="res://art/backgrounds/background_02.png" id="3_x1ehd"]
 [ext_resource type="PackedScene" uid="uid://da2wjukop4k4m" path="res://interactables/pressure_plate/pressure_plate.tscn" id="6_cuh6q"]
 [ext_resource type="PackedScene" uid="uid://dgeaj61y41y0o" path="res://interactables/door/door.tscn" id="7_bj20c"]
+[ext_resource type="PackedScene" uid="uid://cmpnwmq4aqxlx" path="res://interactables/chest/chest.tscn" id="8_5u7o3"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_nwh53"]
 texture = ExtResource("1_bu5tn")
@@ -103,4 +104,9 @@ position = Vector2(946, 573)
 [node name="Door" parent="----- Interactables -----" instance=ExtResource("7_bj20c")]
 position = Vector2(535, 576)
 
+[node name="Chest" parent="----- Interactables -----" instance=ExtResource("8_5u7o3")]
+position = Vector2(320, 576)
+scale = Vector2(-1, 1)
+
 [connection signal="toggle" from="----- Interactables -----/DoorPlate" to="----- Interactables -----/Door" method="activate"]
+[connection signal="toggle" from="----- Interactables -----/DoorPlate" to="----- Interactables -----/Chest" method="_on_test_interact"]
