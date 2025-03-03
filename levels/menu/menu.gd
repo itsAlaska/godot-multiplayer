@@ -50,11 +50,15 @@ func change_level(scene):
 	for child in level_container.get_children():
 		# Removes the child from the level_container
 		level_container.remove_child(child)
+		child.level_complete.disconnect(_on_level_complete)
 		# Deletes the child entirely
 		child.queue_free()
+	var new_level = scene.instantiate()
 	# Creates the level scene that is meant to be the current level and makes 
 	# it a child of the level_container
-	level_container.add_child(scene.instantiate())
+	level_container.add_child(new_level)
+	new_level.level_complete.connect(_on_level_complete)
+	
 	
 func _on_connection_failed():
 	# Updates label text to inform user that they were unable to connect
@@ -73,3 +77,6 @@ func _on_connected_to_server():
 func hide_menu():
 	# Simply hides the entire UI so that it does not cover the game screen
 	ui.hide()
+
+func _on_level_complete():
+	call_deferred("change_level", level_scene)

@@ -5,6 +5,7 @@
 [ext_resource type="Texture2D" uid="uid://b2bad2gagymed" path="res://art/characters/knight/idle/0_Hell_Knight_Idle_000.png" id="2_n7pt0"]
 
 [node name="Knight" instance=ExtResource("1_7ws6e")]
+jump_strength = 605
 max_jumps = 2
 
 [node name="AnimatedSprite2D" parent="." index="1"]

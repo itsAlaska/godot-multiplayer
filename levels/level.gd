@@ -1,10 +1,13 @@
 extends Node2D
 
 
+signal level_complete
+
 @export var player_spawner: MultiplayerSpawner
 @export var players_container: Node2D
 @export var player_scenes: Array[PackedScene]
 @export var spawn_points: Array[Node2D]
+@export var key_door: KeyDoor
 
 var next_spawn_point_index = 0
 var next_character_index = 0
@@ -33,6 +36,8 @@ func _ready() -> void:
 	
 	# Manually run add_player on the host, which always has the id of 1
 	add_player(1)
+	
+	key_door.all_players_finished.connect(_on_all_players_finished)
 	
 func _enter_tree() -> void:
 	# Sets the method to be used each time a player is spawned
@@ -91,5 +96,6 @@ func get_spawn_point():
 	
 	return spawn_point
 
-
-	
+func _on_all_players_finished():
+	key_door.all_players_finished.disconnect(_on_all_players_finished)
+	level_complete.emit()

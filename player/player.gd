@@ -120,7 +120,7 @@ func set_up_camera():
 	camera_instance.global_position.y = camera_height
 	# Accesses the current scene and adds the camera as a child of the current 
 	# scene.
-	get_tree().current_scene.add_child.call_deferred(camera_instance)
+	get_parent().add_child.call_deferred(camera_instance)
 
 func update_camera_pos():
 	# This makes sure the the camera's x-axis is the same as the players so that
