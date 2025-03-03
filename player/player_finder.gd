@@ -14,8 +14,6 @@ func _process(_delta: float) -> void:
 	update_finder_position(Rect2(top_left, size))
 	update_finder_rotation()
 		
-	
-	
 func update_finder_position(bounds):
 	pivot.global_position.x = clamp(
 		global_position.x,

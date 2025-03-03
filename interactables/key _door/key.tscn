@@ -7,14 +7,13 @@
 radius = 57.3149
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_a0aek"]
-properties/0/path = NodePath(".:position")
+properties/0/path = NodePath(".:target_position")
 properties/0/spawn = true
 properties/0/replication_mode = 1
 
 [node name="Key" type="Node2D"]
 script = ExtResource("1_yu8qv")
 follow_offset = Vector2(-50, -60)
-lerp_speed = 5.0
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)

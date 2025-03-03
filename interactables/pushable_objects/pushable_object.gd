@@ -2,12 +2,26 @@ extends RigidBody2D
 class_name PushableObject
 
 
+@export var target_position:= Vector2.INF
+
 var requested_authority = false
 
 
 func _ready() -> void:
 	if not multiplayer.is_server():
 		freeze = true
+		
+func _process(delta: float) -> void:
+	if multiplayer.multiplayer_peer == null:
+		return
+	
+	if is_multiplayer_authority():
+		target_position = global_position
+	else:
+		HelperFunctions.ClientInterpolate(
+			global_position, 
+			target_position, 
+			delta)
 		
 func push(impulse, point):
 	if is_multiplayer_authority():

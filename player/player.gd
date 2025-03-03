@@ -13,6 +13,8 @@ extends CharacterBody2D
 @export var max_jumps = 3
 @export var push_force = 10
 
+@export var target_position := Vector2.INF
+
 @onready var initial_sprite_scale = player_sprite.scale
 
 var owner_id = 1
@@ -47,12 +49,16 @@ func _enter_tree():
 	# Refer to function at the bottom of the script for notes.
 	set_up_camera()
 
-func _process(_delta):
+func _process(delta):
 	if multiplayer.multiplayer_peer == null:
 		return
 	# Makes sure that the code in this function is only run by the owner of this 
 	# scene
 	if owner_id != multiplayer.get_unique_id():
+		global_position = HelperFunctions.ClientInterpolate(
+			global_position,
+			target_position,
+			delta)
 		return
 		
 	# Refer to function at the bottom of the script for notes.
@@ -86,6 +92,8 @@ func _physics_process(_delta: float) -> void:
 		
 	# Default function required for moving character
 	move_and_slide()
+	
+	target_position = global_position
 	
 	for i in get_slide_collision_count():
 		var collision = get_slide_collision(i)
