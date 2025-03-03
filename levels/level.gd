@@ -3,10 +3,11 @@ extends Node2D
 
 @export var player_spawner: MultiplayerSpawner
 @export var players_container: Node2D
-@export var player_scene: PackedScene
+@export var player_scenes: Array[PackedScene]
 @export var spawn_points: Array[Node2D]
 
 var next_spawn_point_index = 0
+var next_character_index = 0
 
 
 func _ready() -> void:
@@ -52,8 +53,21 @@ func _exit_tree() -> void:
 func add_player(id):
 	# Uses the PlayerSpawner spawn function to create the new player
 	player_spawner.spawn(id)
-	
+
+func spawn_player(id):
+	# Instantiates a new player scene
+	var player_instance = player_scenes[next_character_index].instantiate()
+	next_character_index += 1
+	if next_character_index >= len(player_scenes):
+		next_character_index = 0
+	# Set the position of the spawned in player
+	player_instance.position = get_spawn_point()
+	# Changes the name of the player_instance node in the explorer
+	player_instance.name = str(id)
+	# Returns the created instance of the player
+	return player_instance
 # Called when a player leaves the game to clean up any data associated with them
+
 func delete_player(id):
 	# Checks for the id of the player that is needing to be deleted, ends the 
 	# function if they are not found
@@ -77,13 +91,5 @@ func get_spawn_point():
 	
 	return spawn_point
 
-func spawn_player(id):
-	# Instantiates a new player scene
-	var player_instance = player_scene.instantiate()
-	# Set the position of the spawned in player
-	player_instance.position = get_spawn_point()
-	# Changes the name of the player_instance node in the explorer
-	player_instance.name = str(id)
-	# Returns the created instance of the player
-	return player_instance
+
 	

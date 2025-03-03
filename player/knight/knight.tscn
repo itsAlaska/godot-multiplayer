@@ -1,0 +1,17 @@
+[gd_scene load_steps=4 format=3 uid="uid://d1pht4mrncty5"]
+
+[ext_resource type="PackedScene" uid="uid://bk6wdrp6lymso" path="res://player/player.tscn" id="1_7ws6e"]
+[ext_resource type="SpriteFrames" uid="uid://c2vhw78ou38nu" path="res://player/knight/knight.tres" id="2_j3uxj"]
+[ext_resource type="Texture2D" uid="uid://b2bad2gagymed" path="res://art/characters/knight/idle/0_Hell_Knight_Idle_000.png" id="2_n7pt0"]
+
+[node name="Knight" instance=ExtResource("1_7ws6e")]
+max_jumps = 2
+
+[node name="AnimatedSprite2D" parent="." index="1"]
+sprite_frames = ExtResource("2_j3uxj")
+animation = &"idle"
+
+[node name="Icon" parent="PlayerFinder/Pivot" index="0"]
+texture = ExtResource("2_n7pt0")
+
+[editable path="PlayerFinder"]
