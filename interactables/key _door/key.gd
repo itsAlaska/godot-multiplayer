@@ -12,6 +12,7 @@ var following_body
 func _process(delta: float) -> void:
 	if multiplayer.multiplayer_peer == null:
 		return
+		
 	if multiplayer.is_server():
 		if following_body != null:
 			global_position = lerp(
@@ -24,6 +25,7 @@ func _process(delta: float) -> void:
 			global_position, 
 			target_position,
 			delta)
+				
 
 func _on_area_2d_body_entered(body: Node2D) -> void:
 	following_body = body

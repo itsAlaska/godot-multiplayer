@@ -13,7 +13,7 @@ extends CharacterBody2D
 @export var max_jumps = 3
 @export var push_force = 10
 
-@export var target_position := Vector2.INF
+@export var target_position: Vector2 = Vector2.INF
 
 @onready var initial_sprite_scale = player_sprite.scale
 

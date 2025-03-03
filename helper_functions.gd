@@ -2,7 +2,6 @@ extends Node
 class_name HelperFunctions
 
 
-
 static func ClientInterpolate(global_position, target_position, delta, lerp_speed = 25):
 	if target_position == Vector2.INF:
 		return global_position
