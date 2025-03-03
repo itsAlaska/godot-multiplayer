@@ -90,7 +90,8 @@ func _physics_process(_delta: float) -> void:
 		var pushable = collision.get_collider() as PushableObject
 		if pushable == null:
 			continue
-		pushable.push(-collision.get_normal() * push_force, collision.get_position())
+		var point = collision.get_position() - pushable.global_position
+		pushable.push(-collision.get_normal() * push_force, point)
 	
 	# Refer to function at bottom of script for notes.
 	face_movement_direction(horizontal_input)
