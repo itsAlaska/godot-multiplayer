@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://c8hdrnphc5cgv"]
 
 [ext_resource type="Texture2D" uid="uid://d1tvhhykcnhqj" path="res://art/objects/Key_01.png" id="1_xqh2e"]
-[ext_resource type="Script" path="res://interactables/key _door/key.gd" id="1_yu8qv"]
+[ext_resource type="Script" uid="uid://ddrpfmf0kfahm" path="res://interactables/key _door/key.gd" id="1_yu8qv"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_lj064"]
 radius = 57.3149

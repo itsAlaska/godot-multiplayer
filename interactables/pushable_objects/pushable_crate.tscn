@@ -1,7 +1,7 @@
 [gd_scene load_steps=7 format=3 uid="uid://c4fvie3e620wu"]
 
 [ext_resource type="Texture2D" uid="uid://rglygid7fsot" path="res://art/objects/Wooden_Crate.png" id="1_7l15o"]
-[ext_resource type="Script" path="res://interactables/pushable_objects/pushable_object.gd" id="1_gbrd3"]
+[ext_resource type="Script" uid="uid://8qdevul6avcg" path="res://interactables/pushable_objects/pushable_object.gd" id="1_gbrd3"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_y4dgq"]
 friction = 0.5

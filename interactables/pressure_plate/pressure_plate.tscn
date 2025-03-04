@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://da2wjukop4k4m"]
 
-[ext_resource type="Script" path="res://interactables/pressure_plate/pressure_plate.gd" id="1_hba07"]
+[ext_resource type="Script" uid="uid://2x883k21183n" path="res://interactables/pressure_plate/pressure_plate.gd" id="1_hba07"]
 [ext_resource type="Texture2D" uid="uid://cu3ucp0ocryit" path="res://art/objects/Pillar_01.png" id="1_pdpfh"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_mdpdm"]

@@ -1,6 +1,6 @@
 [gd_scene load_steps=9 format=3 uid="uid://cmpnwmq4aqxlx"]
 
-[ext_resource type="Script" path="res://interactables/chest/chest.gd" id="1_85f6l"]
+[ext_resource type="Script" uid="uid://cns2mpb64f55h" path="res://interactables/chest/chest.gd" id="1_85f6l"]
 [ext_resource type="Texture2D" uid="uid://bb74mmf3rdg4r" path="res://art/objects/Chest_01_Locked.png" id="1_myip8"]
 [ext_resource type="PackedScene" uid="uid://c8hdrnphc5cgv" path="res://interactables/key _door/key.tscn" id="2_6cpj0"]
 [ext_resource type="Texture2D" uid="uid://ctvthkqtgqmgm" path="res://art/objects/Chest_01_Unlocked.png" id="2_ifuc4"]
